@@ -6,8 +6,8 @@ using namespace algorithm;
 
 #include <vector>
 
-std::vector<int> removeDuplicates(std::vector<int> vec) {
-	std::vector<int> uniqueVec;
+vector<int> removeDuplicates(std::vector<int> vec) {
+	vector<int> uniqueVec;
 
 	for (int i = 0; i < vec.size(); ++i) {
 		bool isDuplicate = false;
@@ -92,6 +92,6 @@ int main() {
 	vector<int> originalVec = { 1, 2, 3, 2, 4, 5, 3, 6, 7, 1 };
 	vector<int> uniqueVec = removeDuplicates(originalVec);
 	for (int i = 0; i < uniqueVec.size(); ++i) {
-		std::cout << uniqueVec[i] << " ";
+		cout << uniqueVec[i] << " ";
 	}
 }
