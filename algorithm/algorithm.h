@@ -30,6 +30,7 @@ namespace algorithm {
 		void set_erase_info(size_t size);
 		void vector_insert_info(size_t size);
 		void vector_contains_info(size_t size);
+		Node<T>* get_root();
 		void vector_erase_info(size_t size);
 		Set& operator=(const Set& other) {
 			if (this != &other) {
@@ -130,6 +131,7 @@ namespace algorithm {
 		}
 		return false;
 	}
+
 
 	template<typename T>
 	bool Set<T>::erase(T _data)
@@ -266,6 +268,12 @@ namespace algorithm {
 	}
 
 	template<typename T>
+	inline Node<T>* Set<T>::get_root()
+	{
+		return _root;
+	}
+
+	template<typename T>
 	void Set<T>::vector_erase_info(size_t size) {
 		vector<int> data;
 		double result = 0.0;
@@ -289,4 +297,5 @@ namespace algorithm {
 
 		cout << "Vector insert and erase method with " << size << " numbers take: " << result << endl;
 	}
+	
 }

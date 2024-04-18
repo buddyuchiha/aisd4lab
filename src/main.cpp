@@ -3,27 +3,42 @@
 #include "..\algorithm\algorithm.h"
 using namespace std;
 using namespace algorithm;
+template<typename T>
+Set<T> intersection( Set<T>& set1,  Set<T>& set2) {
+	Set<T> result;
+	Node<T>* current1 = set1.get_root();
 
-#include <vector>
-
-vector<int> removeDuplicates(std::vector<int> vec) {
-	vector<int> uniqueVec;
-
-	for (int i = 0; i < vec.size(); ++i) {
-		bool isDuplicate = false;
-		for (int j = 0; j < uniqueVec.size(); ++j) {
-			if (vec[i] == uniqueVec[j]) {
-				isDuplicate = true;
-				break;
-			}
+	while (current1) {
+		if (set2.contains(current1->_data)) {
+			result.insert(current1->_data);
 		}
-		if (!isDuplicate) {
-			uniqueVec.push_back(vec[i]);
-		}
+		current1 = current1->_right;
 	}
 
-	return uniqueVec;
+	return result;
 }
+
+template<typename T>
+Set<T> difference( Set<T>& set1, Set<T>& set2) {
+	Set<T> result;
+	Node<T>* current1 = set1.get_root();
+	Node<T>* current2 = set2.get_root();
+
+	while (current1) {
+		if (!set2.contains(current1->_data)){
+			result.insert(current1->_data);
+		}
+		current1 = current1->_right;
+	}
+	while (current2) {
+		if (!set1.contains(current2 -> _data)) {
+			result.insert(current2 -> _data);
+		}
+		current2 = current2 -> _right;
+	}
+	return result;
+}
+
 
 int main() {
 	cout << "Set Tests:" << endl;
@@ -88,10 +103,26 @@ int main() {
 	mySet9.vector_erase_info(1000);
 	mySet9.vector_erase_info(10000);
 	cout << endl;
-	cout << "Variant 4 task: " << endl;
-	vector<int> originalVec = { 1, 2, 3, 2, 4, 5, 3, 6, 7, 1 };
-	vector<int> uniqueVec = removeDuplicates(originalVec);
-	for (int i = 0; i < uniqueVec.size(); ++i) {
-		cout << uniqueVec[i] << " ";
-	}
+	cout << "Variant 1 task: " << endl;
+	Set<int> VarSet1;
+	Set<int> VarSet2;
+	VarSet1.insert(1);
+	VarSet1.insert(2);
+	VarSet1.insert(3);
+	VarSet1.insert(4);
+	VarSet1.insert(5);
+	VarSet1.insert(6);
+	VarSet2.insert(1);
+	VarSet2.insert(3);
+	VarSet2.insert(6);
+	VarSet2.insert(7);
+	VarSet2.insert(10);
+	Set<int> intersectionSet = intersection<int>(VarSet1, VarSet2);
+	Set<int> differenceSet = difference<int>(VarSet1, VarSet2);
+
+	cout << "Intersection: ";
+	intersectionSet.print();
+
+	cout << "Difference: ";
+	differenceSet.print();
 }
